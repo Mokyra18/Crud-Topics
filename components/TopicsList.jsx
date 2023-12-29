@@ -31,7 +31,7 @@ export default async function TopicsList() {
         >
           <div>
             <h2 className="font-bold text-2xl">{t.title}</h2>
-            <div>{t.description}</div>
+            <div>{t.description} - {t.author} - {t.category} - {t.language} - {t.tags} - {t.location} </div>
           </div>
 
           <div className="flex gap-2">

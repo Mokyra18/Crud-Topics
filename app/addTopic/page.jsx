@@ -6,14 +6,19 @@ import { useRouter } from "next/navigation";
 export default function AddTopic() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [author, setAuthor] = useState("");
+  const [category, setCategory] = useState("");
+  const [language, setLanguage] = useState("");
+  const [tags, setTags] = useState("");
+  const [location, setLocation] = useState("");
 
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!title || !description) {
-      alert("Title and description are required.");
+    if (!title || !description || !author  || !category  || !language  || !tags  || !location) {
+      alert("Field are required.");
       return;
     }
 
@@ -23,11 +28,10 @@ export default function AddTopic() {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ title, description }),
+        body: JSON.stringify({ title, description, author, category, language, tags, location }),
       });
 
       if (res.ok) {
-        router.refresh();
         router.push("/");
       } else {
         throw new Error("Failed to create a topic");
@@ -53,6 +57,46 @@ export default function AddTopic() {
         className="border border-slate-500 px-8 py-2"
         type="text"
         placeholder="Topic Description"
+      />
+
+      <input
+        onChange={(e) => setAuthor(e.target.value)}
+        value={author}
+        className="border border-slate-500 px-8 py-2"
+        type="text"
+        placeholder="Topic Author"
+      />
+
+      <input
+        onChange={(e) => setCategory(e.target.value)}
+        value={category}
+        className="border border-slate-500 px-8 py-2"
+        type="text"
+        placeholder="Topic Category"
+      />
+
+      <input
+        onChange={(e) => setLanguage(e.target.value)}
+        value={language}
+        className="border border-slate-500 px-8 py-2"
+        type="text"
+        placeholder="Topic Language"
+      />
+
+      <input
+        onChange={(e) => setTags(e.target.value)}
+        value={tags}
+        className="border border-slate-500 px-8 py-2"
+        type="text"
+        placeholder="Topic Tags"
+      />
+
+      <input
+        onChange={(e) => setLocation(e.target.value)}
+        value={location}
+        className="border border-slate-500 px-8 py-2"
+        type="text"
+        placeholder="Topic Location"
       />
 
       <button
